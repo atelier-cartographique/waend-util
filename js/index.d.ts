@@ -3,6 +3,7 @@
 import { InterfaceProjection } from "proj4";
 import { vec2 } from 'gl-matrix';
 import { Transform, Model } from "waend-lib";
+export * from './dom';
 export declare function getModelName(model: Model): string;
 export declare function copy<T>(data: T): T;
 export declare function pathKey(objOpt: any, pathOpt: string, def: any): any;

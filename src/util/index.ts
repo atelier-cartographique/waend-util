@@ -3,6 +3,7 @@ import { Proj, InterfaceProjection } from "proj4";
 import { vec2 } from 'gl-matrix';
 import { Transform, Model, CoordPolygon, CoordLinestring } from "waend-lib";
 
+export * from './dom';
 
 
 export function getModelName(model: Model) {
