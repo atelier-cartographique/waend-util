@@ -273,7 +273,7 @@ export namespace dom {
     }
 
 
-    export function getDomForModel(model: Model, key: string, tagName = 'div', className: string) {
+    export function getDomForModel(model: Model, key: string, tagName = 'div', className?: string) {
         const element = document.createElement(tagName);
         addClass(element, `model-fragment ${className}`);
 

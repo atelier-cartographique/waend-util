@@ -123,5 +123,5 @@ export declare namespace dom {
     function makeButton(label: string, attrs: any, callback: (a: MouseEvent) => void): HTMLDivElement;
     function makeInput(options: any, callback: (a: string | number) => void): HTMLDivElement;
     function eventPreventer(elem: Element, events: string[]): void;
-    function getDomForModel(model: Model, key: string, tagName: string | undefined, className: string): HTMLElement;
+    function getDomForModel(model: Model, key: string, tagName?: string, className?: string): HTMLElement;
 }
