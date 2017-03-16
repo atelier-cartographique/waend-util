@@ -18,6 +18,40 @@ function copy(data) {
     return JSON.parse(JSON.stringify(data));
 }
 exports.copy = copy;
+exports.getPathComponents = (path) => {
+    const comps = path.split('/');
+    if (4 === comps.length) {
+        return {
+            pathType: 'feature',
+            user: comps[0],
+            group: comps[1],
+            layer: comps[2],
+            feature: comps[3],
+        };
+    }
+    else if (3 === comps.length) {
+        return {
+            pathType: 'layer',
+            user: comps[0],
+            group: comps[1],
+            layer: comps[2],
+        };
+    }
+    else if (2 === comps.length) {
+        return {
+            pathType: 'group',
+            user: comps[0],
+            group: comps[1],
+        };
+    }
+    else if (1 === comps.length) {
+        return {
+            pathType: 'user',
+            user: comps[0],
+        };
+    }
+    return null;
+};
 function pathKey(objOpt, pathOpt, def) {
     const path = pathOpt.split('.');
     let obj = objOpt;

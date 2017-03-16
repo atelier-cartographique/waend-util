@@ -1,7 +1,9 @@
 
 import { Proj, InterfaceProjection } from "proj4";
 import { vec2 } from 'gl-matrix';
-import { Transform, Model, CoordPolygon, CoordLinestring } from "waend-lib";
+import {
+    Transform, Model, CoordPolygon, CoordLinestring
+} from "waend-lib";
 
 export * from './dom';
 
@@ -18,6 +20,54 @@ export function getModelName(model: Model) {
 export function copy<T>(data: T): T {
     return JSON.parse(JSON.stringify(data));
 }
+
+export type ComponentsPathType = 'user' | 'group' | 'layer' | 'feature'
+export interface Components {
+    pathType: ComponentsPathType;
+    user: string;
+    group?: string;
+    layer?: string;
+    feature?: string;
+}
+
+
+export const getPathComponents: (a: string) => (Components | null) =
+    (path) => {
+        const comps = path.split('/');
+
+        if (4 === comps.length) {
+            return {
+                pathType: 'feature',
+                user: comps[0],
+                group: comps[1],
+                layer: comps[2],
+                feature: comps[3],
+            };
+        }
+        else if (3 === comps.length) {
+            return {
+                pathType: 'layer',
+                user: comps[0],
+                group: comps[1],
+                layer: comps[2],
+            };
+        }
+        else if (2 === comps.length) {
+            return {
+                pathType: 'group',
+                user: comps[0],
+                group: comps[1],
+            };
+        }
+        else if (1 === comps.length) {
+            return {
+                pathType: 'user',
+                user: comps[0],
+            };
+        }
+
+        return null;
+    }
 
 
 

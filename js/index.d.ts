@@ -6,6 +6,15 @@ import { Transform, Model } from "waend-lib";
 export * from './dom';
 export declare function getModelName(model: Model): string;
 export declare function copy<T>(data: T): T;
+export declare type ComponentsPathType = 'user' | 'group' | 'layer' | 'feature';
+export interface Components {
+    pathType: ComponentsPathType;
+    user: string;
+    group?: string;
+    layer?: string;
+    feature?: string;
+}
+export declare const getPathComponents: (a: string) => (Components | null);
 export declare function pathKey(objOpt: any, pathOpt: string, def: any): any;
 export declare function isZero(val: number): boolean;
 export declare function vecDist<T extends (vec2 | number[])>(v1: T, v2: T): number;
