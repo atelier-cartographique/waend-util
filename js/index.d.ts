@@ -1,6 +1,6 @@
 /// <reference types="gl-matrix" />
 /// <reference types="proj4" />
-import { InterfaceProjection } from "proj4";
+import * as proj4 from "proj4";
 import { vec2 } from 'gl-matrix';
 import { Transform, Model } from "waend-lib";
 export * from './dom';
@@ -41,8 +41,8 @@ export declare const polygonTransform: (T: Transform, coordinates: number[][][])
 export declare const lineTransform: (T: Transform, coordinates: number[][]) => number[][];
 export declare const polygonFloor: (coordinates: number[][][]) => number[][][];
 export declare const lineFloor: (coordinates: number[][]) => number[][];
-export declare const Proj3857: InterfaceProjection;
-export declare function projectExtent(extent: number[], proj?: InterfaceProjection): number[];
-export declare function unprojectExtent(extent: number[], proj?: InterfaceProjection): number[];
+export declare const Proj3857: proj4.InterfaceProjection;
+export declare function projectExtent(extent: number[], proj?: proj4.InterfaceProjection): number[];
+export declare function unprojectExtent(extent: number[], proj?: proj4.InterfaceProjection): number[];
 export declare const polygonProject: (coordinates: number[][][]) => number[][][];
 export declare const lineProject: (coordinates: number[][]) => number[][];

@@ -1,5 +1,5 @@
 
-import { Proj, InterfaceProjection } from "proj4";
+import * as proj4 from "proj4";
 import { vec2 } from 'gl-matrix';
 import {
     Transform, Model, CoordPolygon, CoordLinestring
@@ -200,7 +200,7 @@ export const lineFloor = (coordinates: CoordLinestring) => {
 
 // GEO
 
-export const Proj3857: InterfaceProjection = Proj('EPSG:3857');
+export const Proj3857: proj4.InterfaceProjection = proj4.Proj('EPSG:3857');
 
 export function projectExtent(extent: number[], proj = Proj3857) {
     const min = proj.forward(extent.slice(0, 2));
