@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "waend util",
   "main": "js/index",
-    "typings": "js/index",
+  "typings": "js/index",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,7 +13,7 @@
     "@types/gl-matrix": "^2.2.34",
     "@types/lodash": "^4.14.55",
     "@types/node": "^7.0.8",
-    "@types/proj4": "^2.3.3",
+    "@types/proj4": "../types-proj4",
     "gl-matrix": "^2.3.2",
     "lodash": "^4.17.4",
     "proj4": "^2.4.3",
