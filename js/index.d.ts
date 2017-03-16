@@ -9,10 +9,28 @@ export declare function copy<T>(data: T): T;
 export declare type ComponentsPathType = 'user' | 'group' | 'layer' | 'feature';
 export interface Components {
     pathType: ComponentsPathType;
+}
+export interface UserComponents extends Components {
+    pathType: 'user';
     user: string;
-    group?: string;
-    layer?: string;
-    feature?: string;
+}
+export interface GroupComponents extends Components {
+    pathType: 'group';
+    user: string;
+    group: string;
+}
+export interface LayerComponents extends Components {
+    pathType: 'layer';
+    user: string;
+    group: string;
+    layer: string;
+}
+export interface FeatureComponents extends Components {
+    pathType: 'feature';
+    user: string;
+    group: string;
+    layer: string;
+    feature: string;
 }
 export declare const getPathComponents: (a: string) => (Components | null);
 export declare function pathKey(objOpt: any, pathOpt: string, def: any): any;
