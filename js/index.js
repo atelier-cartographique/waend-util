@@ -3,7 +3,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-const proj4 = require("proj4");
+const proj4_1 = require("proj4");
 const gl_matrix_1 = require("gl-matrix");
 __export(require("./dom"));
 function getModelName(model) {
@@ -142,7 +142,7 @@ exports.lineFloor = (coordinates) => {
     }
     return coordinates;
 };
-exports.Proj3857 = proj4.Proj('EPSG:3857');
+exports.Proj3857 = proj4_1.default.Proj('EPSG:3857');
 function projectExtent(extent, proj = exports.Proj3857) {
     const min = proj.forward(extent.slice(0, 2));
     const max = proj.forward(extent.slice(2));

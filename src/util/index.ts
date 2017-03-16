@@ -1,5 +1,5 @@
 
-import * as proj4 from "proj4";
+import proj4 from "proj4";
 import { vec2 } from 'gl-matrix';
 import {
     Transform, Model, CoordPolygon, CoordLinestring
