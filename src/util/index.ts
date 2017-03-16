@@ -21,26 +21,22 @@ export function copy<T>(data: T): T {
     return JSON.parse(JSON.stringify(data));
 }
 
-export type ComponentsPathType = 'user' | 'group' | 'layer' | 'feature'
-export interface Components {
-    pathType: ComponentsPathType;
-}
-export interface UserComponents extends Components {
+export interface UserComponents {
     pathType: 'user';
     user: string;
 }
-export interface GroupComponents extends Components {
+export interface GroupComponents {
     pathType: 'group';
     user: string;
     group: string;
 }
-export interface LayerComponents extends Components {
+export interface LayerComponents {
     pathType: 'layer';
     user: string;
     group: string;
     layer: string;
 }
-export interface FeatureComponents extends Components {
+export interface FeatureComponents {
     pathType: 'feature';
     user: string;
     group: string;
@@ -48,7 +44,7 @@ export interface FeatureComponents extends Components {
     feature: string;
 }
 
-
+export type Components = UserComponents | GroupComponents | LayerComponents | FeatureComponents;
 
 export const getPathComponents: (a: string) => (Components | null) =
     (path) => {
@@ -87,6 +83,7 @@ export const getPathComponents: (a: string) => (Components | null) =
 
         return null;
     }
+
 
 
 

@@ -6,32 +6,29 @@ import { Transform, Model } from "waend-lib";
 export * from './dom';
 export declare function getModelName(model: Model): string;
 export declare function copy<T>(data: T): T;
-export declare type ComponentsPathType = 'user' | 'group' | 'layer' | 'feature';
-export interface Components {
-    pathType: ComponentsPathType;
-}
-export interface UserComponents extends Components {
+export interface UserComponents {
     pathType: 'user';
     user: string;
 }
-export interface GroupComponents extends Components {
+export interface GroupComponents {
     pathType: 'group';
     user: string;
     group: string;
 }
-export interface LayerComponents extends Components {
+export interface LayerComponents {
     pathType: 'layer';
     user: string;
     group: string;
     layer: string;
 }
-export interface FeatureComponents extends Components {
+export interface FeatureComponents {
     pathType: 'feature';
     user: string;
     group: string;
     layer: string;
     feature: string;
 }
+export declare type Components = UserComponents | GroupComponents | LayerComponents | FeatureComponents;
 export declare const getPathComponents: (a: string) => (Components | null);
 export declare function pathKey(objOpt: any, pathOpt: string, def: any): any;
 export declare function isZero(val: number): boolean;
