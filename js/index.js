@@ -19,7 +19,7 @@ function copy(data) {
 }
 exports.copy = copy;
 exports.getPathComponents = (path) => {
-    const comps = path.split('/');
+    const comps = path.split('/').slice(1);
     if (4 === comps.length) {
         return {
             pathType: 'feature',

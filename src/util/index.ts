@@ -48,7 +48,7 @@ export type Components = UserComponents | GroupComponents | LayerComponents | Fe
 
 export const getPathComponents: (a: string) => (Components | null) =
     (path) => {
-        const comps = path.split('/');
+        const comps = path.split('/').slice(1);
 
         if (4 === comps.length) {
             return {
