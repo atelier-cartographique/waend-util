@@ -243,6 +243,14 @@ export const pointProject = (coordinates: CoordPoint) => {
     return coordinates;
 };
 
+export const pointUnproject = (coordinates: CoordPoint) => {
+    const { x, y } = Proj3857.inverse(proj4.toPoint(coordinates));
+    coordinates[0] = x;
+    coordinates[1] = y;
+
+    return coordinates;
+};
+
 
 
 // export function layerExtent(layer: Layer) {

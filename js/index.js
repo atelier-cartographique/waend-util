@@ -178,3 +178,9 @@ exports.pointProject = (coordinates) => {
     coordinates[1] = y;
     return coordinates;
 };
+exports.pointUnproject = (coordinates) => {
+    const { x, y } = exports.Proj3857.inverse(proj4_1.default.toPoint(coordinates));
+    coordinates[0] = x;
+    coordinates[1] = y;
+    return coordinates;
+};

@@ -46,3 +46,4 @@ export declare function unprojectExtent(extent: number[], proj?: proj4.Interface
 export declare const polygonProject: (coordinates: number[][][]) => number[][][];
 export declare const lineProject: (coordinates: number[][]) => number[][];
 export declare const pointProject: (coordinates: number[]) => number[];
+export declare const pointUnproject: (coordinates: number[]) => number[];
