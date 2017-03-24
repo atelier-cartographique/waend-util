@@ -172,3 +172,9 @@ exports.lineProject = (coordinates) => {
     }
     return coordinates;
 };
+exports.pointProject = (coordinates) => {
+    const { x, y } = exports.Proj3857.forward(proj4_1.default.toPoint(coordinates));
+    coordinates[0] = x;
+    coordinates[1] = y;
+    return coordinates;
+};

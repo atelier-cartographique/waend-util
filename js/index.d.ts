@@ -45,3 +45,4 @@ export declare function projectExtent(extent: number[], proj?: proj4.InterfacePr
 export declare function unprojectExtent(extent: number[], proj?: proj4.InterfaceProjection): number[];
 export declare const polygonProject: (coordinates: number[][][]) => number[][][];
 export declare const lineProject: (coordinates: number[][]) => number[][];
+export declare const pointProject: (coordinates: number[]) => number[];

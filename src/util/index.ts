@@ -2,7 +2,7 @@
 import proj4 from 'proj4';
 import { vec2 } from 'gl-matrix';
 import {
-    Transform, Model, CoordPolygon, CoordLinestring
+    Transform, Model, CoordPolygon, CoordLinestring, CoordPoint
 } from "waend-lib";
 
 export * from './dom';
@@ -235,7 +235,15 @@ export const lineProject = (coordinates: CoordLinestring) => {
     return coordinates;
 };
 
-//
+export const pointProject = (coordinates: CoordPoint) => {
+    const { x, y } = Proj3857.forward(proj4.toPoint(coordinates));
+    coordinates[0] = x;
+    coordinates[1] = y;
+
+    return coordinates;
+};
+
+
 
 // export function layerExtent(layer: Layer) {
 //     const path = layer.getPath();
