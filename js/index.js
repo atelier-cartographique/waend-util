@@ -142,16 +142,20 @@ exports.lineFloor = (coordinates) => {
     }
     return coordinates;
 };
-exports.Proj3857 = proj4_1.default.Proj('EPSG:3857');
-function projectExtent(extent, proj = exports.Proj3857) {
-    const min = proj.forward(proj4_1.default.toPoint(extent.slice(0, 2)));
-    const max = proj.forward(proj4_1.default.toPoint(extent.slice(2)));
+_a = proj4_1.default(proj4_1.default.WGS84, 'EPSG:3857'), exports.forward = _a.forward, exports.inverse = _a.inverse;
+function projectExtent(extent) {
+    const p0 = proj4_1.default.toPoint(extent.slice(0, 2));
+    const p1 = proj4_1.default.toPoint(extent.slice(2));
+    const min = exports.forward(p0);
+    const max = exports.forward(p1);
     return [min.x, min.y, max.x, max.y];
 }
 exports.projectExtent = projectExtent;
-function unprojectExtent(extent, proj = exports.Proj3857) {
-    const min = proj.inverse(proj4_1.default.toPoint(extent.slice(0, 2)));
-    const max = proj.inverse(proj4_1.default.toPoint(extent.slice(2)));
+function unprojectExtent(extent) {
+    const p0 = proj4_1.default.toPoint(extent.slice(0, 2));
+    const p1 = proj4_1.default.toPoint(extent.slice(2));
+    const min = exports.inverse(p0);
+    const max = exports.inverse(p1);
     return [min.x, min.y, max.x, max.y];
 }
 exports.unprojectExtent = unprojectExtent;
@@ -159,7 +163,7 @@ exports.polygonProject = (coordinates) => {
     for (let i = 0; i < coordinates.length; i++) {
         const ringLength = coordinates[i].length;
         for (let ii = 0; ii < ringLength; ii++) {
-            const { x, y } = exports.Proj3857.forward(proj4_1.default.toPoint(coordinates[i][ii]));
+            const { x, y } = exports.forward(proj4_1.default.toPoint(coordinates[i][ii]));
             coordinates[i][ii] = [x, y];
         }
     }
@@ -167,20 +171,21 @@ exports.polygonProject = (coordinates) => {
 };
 exports.lineProject = (coordinates) => {
     for (let i = 0; i < coordinates.length; i++) {
-        const { x, y } = exports.Proj3857.forward(proj4_1.default.toPoint(coordinates[i]));
+        const { x, y } = exports.forward(proj4_1.default.toPoint(coordinates[i]));
         coordinates[i] = [x, y];
     }
     return coordinates;
 };
 exports.pointProject = (coordinates) => {
-    const { x, y } = exports.Proj3857.forward(proj4_1.default.toPoint(coordinates));
+    const { x, y } = exports.forward(proj4_1.default.toPoint(coordinates));
     coordinates[0] = x;
     coordinates[1] = y;
     return coordinates;
 };
 exports.pointUnproject = (coordinates) => {
-    const { x, y } = exports.Proj3857.inverse(proj4_1.default.toPoint(coordinates));
+    const { x, y } = exports.inverse(proj4_1.default.toPoint(coordinates));
     coordinates[0] = x;
     coordinates[1] = y;
     return coordinates;
 };
+var _a;

@@ -40,9 +40,9 @@ export declare const polygonTransform: (T: Transform, coordinates: number[][][])
 export declare const lineTransform: (T: Transform, coordinates: number[][]) => number[][];
 export declare const polygonFloor: (coordinates: number[][][]) => number[][][];
 export declare const lineFloor: (coordinates: number[][]) => number[][];
-export declare const Proj3857: proj4.InterfaceProjection;
-export declare function projectExtent(extent: number[], proj?: proj4.InterfaceProjection): number[];
-export declare function unprojectExtent(extent: number[], proj?: proj4.InterfaceProjection): number[];
+export declare const forward: (coordinates: proj4.InterfaceCoordinates) => proj4.InterfaceCoordinates, inverse: (coordinates: proj4.InterfaceCoordinates) => proj4.InterfaceCoordinates;
+export declare function projectExtent(extent: number[]): number[];
+export declare function unprojectExtent(extent: number[]): number[];
 export declare const polygonProject: (coordinates: number[][][]) => number[][][];
 export declare const lineProject: (coordinates: number[][]) => number[][];
 export declare const pointProject: (coordinates: number[]) => number[];
