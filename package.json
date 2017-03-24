@@ -13,10 +13,9 @@
     "@types/gl-matrix": "^2.2.34",
     "@types/lodash": "^4.14.55",
     "@types/node": "^7.0.8",
-    "@types/proj4": "atelier-cartographique/typings-proj4",
     "gl-matrix": "^2.3.2",
     "lodash": "^4.17.4",
-    "proj4": "^2.4.3",
+    "proj4": "github:atelier-cartographique/proj4js#typescript-definitions",
     "waend-lib": "github:atelier-cartographique/waend-lib"
   }
 }

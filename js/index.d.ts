@@ -1,6 +1,5 @@
 /// <reference types="gl-matrix" />
-/// <reference types="proj4" />
-import proj4 from "proj4";
+import proj4 from 'proj4';
 import { vec2 } from 'gl-matrix';
 import { Transform, Model } from "waend-lib";
 export * from './dom';

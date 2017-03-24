@@ -144,29 +144,31 @@ exports.lineFloor = (coordinates) => {
 };
 exports.Proj3857 = proj4_1.default.Proj('EPSG:3857');
 function projectExtent(extent, proj = exports.Proj3857) {
-    const min = proj.forward(extent.slice(0, 2));
-    const max = proj.forward(extent.slice(2));
-    return min.concat(max);
+    const min = proj.forward(proj4_1.default.toPoint(extent.slice(0, 2)));
+    const max = proj.forward(proj4_1.default.toPoint(extent.slice(2)));
+    return [min.x, min.y, max.x, max.y];
 }
 exports.projectExtent = projectExtent;
 function unprojectExtent(extent, proj = exports.Proj3857) {
-    const min = proj.inverse(extent.slice(0, 2));
-    const max = proj.inverse(extent.slice(2));
-    return min.concat(max);
+    const min = proj.inverse(proj4_1.default.toPoint(extent.slice(0, 2)));
+    const max = proj.inverse(proj4_1.default.toPoint(extent.slice(2)));
+    return [min.x, min.y, max.x, max.y];
 }
 exports.unprojectExtent = unprojectExtent;
 exports.polygonProject = (coordinates) => {
     for (let i = 0; i < coordinates.length; i++) {
         const ringLength = coordinates[i].length;
         for (let ii = 0; ii < ringLength; ii++) {
-            coordinates[i][ii] = exports.Proj3857.forward(coordinates[i][ii]);
+            const { x, y } = exports.Proj3857.forward(proj4_1.default.toPoint(coordinates[i][ii]));
+            coordinates[i][ii] = [x, y];
         }
     }
     return coordinates;
 };
 exports.lineProject = (coordinates) => {
     for (let i = 0; i < coordinates.length; i++) {
-        coordinates[i] = exports.Proj3857.forward(coordinates[i]);
+        const { x, y } = exports.Proj3857.forward(proj4_1.default.toPoint(coordinates[i]));
+        coordinates[i] = [x, y];
     }
     return coordinates;
 };

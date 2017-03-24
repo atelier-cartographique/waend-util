@@ -1,12 +1,11 @@
 
-import proj4 from "proj4";
+import proj4 from 'proj4';
 import { vec2 } from 'gl-matrix';
 import {
     Transform, Model, CoordPolygon, CoordLinestring
 } from "waend-lib";
 
 export * from './dom';
-
 
 export function getModelName(model: Model) {
     const name = model.get('name', null);
@@ -203,15 +202,15 @@ export const lineFloor = (coordinates: CoordLinestring) => {
 export const Proj3857: proj4.InterfaceProjection = proj4.Proj('EPSG:3857');
 
 export function projectExtent(extent: number[], proj = Proj3857) {
-    const min = proj.forward(extent.slice(0, 2));
-    const max = proj.forward(extent.slice(2));
-    return min.concat(max);
+    const min = proj.forward(proj4.toPoint(extent.slice(0, 2)));
+    const max = proj.forward(proj4.toPoint(extent.slice(2)));
+    return [min.x, min.y, max.x, max.y];
 }
 
 export function unprojectExtent(extent: number[], proj = Proj3857) {
-    const min = proj.inverse(extent.slice(0, 2));
-    const max = proj.inverse(extent.slice(2));
-    return min.concat(max);
+    const min = proj.inverse(proj4.toPoint(extent.slice(0, 2)));
+    const max = proj.inverse(proj4.toPoint(extent.slice(2)));
+    return [min.x, min.y, max.x, max.y];
 }
 
 
@@ -221,7 +220,8 @@ export const polygonProject = (coordinates: CoordPolygon) => {
     for (let i = 0; i < coordinates.length; i++) {
         const ringLength = coordinates[i].length;
         for (let ii = 0; ii < ringLength; ii++) {
-            coordinates[i][ii] = Proj3857.forward(coordinates[i][ii]);
+            const { x, y } = Proj3857.forward(proj4.toPoint(coordinates[i][ii]));
+            coordinates[i][ii] = [x, y]
         }
     }
     return coordinates;
@@ -229,7 +229,8 @@ export const polygonProject = (coordinates: CoordPolygon) => {
 
 export const lineProject = (coordinates: CoordLinestring) => {
     for (let i = 0; i < coordinates.length; i++) {
-        coordinates[i] = Proj3857.forward(coordinates[i]);
+        const { x, y } = Proj3857.forward(proj4.toPoint(coordinates[i]));
+        coordinates[i] = [x, y];
     }
     return coordinates;
 };
