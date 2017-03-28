@@ -104,9 +104,11 @@ export function pathKey(objOpt: any, pathOpt: string, def: any): any {
 
 
 // GEOM
+// EPSILON does not exist in es5
+export const EPSILON = 2.220446049250313e-16;
 
 export function isZero(val: number) {
-    return Math.abs(val) <= Number.EPSILON;
+    return Math.abs(val) <= EPSILON;
 }
 
 
@@ -126,7 +128,7 @@ export function vecAdd<T extends (vec2 | number[])>(v1: T, v2: T, a: number): [n
 
 
 export function vecEquals(v1: number[], v2: number[]) {
-    return (vecDist(v1, v2) < Number.EPSILON);
+    return (vecDist(v1, v2) < EPSILON);
 }
 
 

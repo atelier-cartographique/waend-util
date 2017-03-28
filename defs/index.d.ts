@@ -30,6 +30,7 @@ export interface FeatureComponents {
 export declare type Components = UserComponents | GroupComponents | LayerComponents | FeatureComponents;
 export declare const getPathComponents: (a: string) => (Components | null);
 export declare function pathKey(objOpt: any, pathOpt: string, def: any): any;
+export declare const EPSILON = 2.220446049250313e-16;
 export declare function isZero(val: number): boolean;
 export declare function vecDist<T extends (vec2 | number[])>(v1: T, v2: T): number;
 export declare function vecAdd<T extends (vec2 | number[])>(v1: T, v2: T, a: number): [number, number];
