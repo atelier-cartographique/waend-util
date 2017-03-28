@@ -1,5 +1,5 @@
 
-import proj4 from 'proj4';
+import * as proj4 from 'proj4';
 import { vec2 } from 'gl-matrix';
 import {
     Transform, Model, CoordPolygon, CoordLinestring, CoordPoint
@@ -204,21 +204,21 @@ export const lineFloor = (coordinates: CoordLinestring) => {
 export const { forward, inverse } = proj4(proj4.WGS84, 'EPSG:3857');
 
 export function projectExtent(extent: number[]) {
-    const p0 = proj4.toPoint(extent.slice(0, 2))
-    const p1 = proj4.toPoint(extent.slice(2));
+    const p0 = extent.slice(0, 2);
+    const p1 = extent.slice(2);
     const min = forward(p0);
     const max = forward(p1);
 
-    return [min.x, min.y, max.x, max.y];
+    return min.concat(max);
 }
 
 export function unprojectExtent(extent: number[]) {
-    const p0 = proj4.toPoint(extent.slice(0, 2))
-    const p1 = proj4.toPoint(extent.slice(2));
+    const p0 = extent.slice(0, 2);
+    const p1 = extent.slice(2);
     const min = inverse(p0);
     const max = inverse(p1);
 
-    return [min.x, min.y, max.x, max.y];
+    return min.concat(max);
 }
 
 
@@ -228,8 +228,7 @@ export const polygonProject = (coordinates: CoordPolygon) => {
     for (let i = 0; i < coordinates.length; i++) {
         const ringLength = coordinates[i].length;
         for (let ii = 0; ii < ringLength; ii++) {
-            const { x, y } = forward(proj4.toPoint(coordinates[i][ii]));
-            coordinates[i][ii] = [x, y]
+            coordinates[i][ii] = forward(coordinates[i][ii]);
         }
     }
     return coordinates;
@@ -237,24 +236,19 @@ export const polygonProject = (coordinates: CoordPolygon) => {
 
 export const lineProject = (coordinates: CoordLinestring) => {
     for (let i = 0; i < coordinates.length; i++) {
-        const { x, y } = forward(proj4.toPoint(coordinates[i]));
-        coordinates[i] = [x, y];
+        coordinates[i] = forward(coordinates[i]);
     }
     return coordinates;
 };
 
 export const pointProject = (coordinates: CoordPoint) => {
-    const { x, y } = forward(proj4.toPoint(coordinates));
-    coordinates[0] = x;
-    coordinates[1] = y;
+    coordinates = forward(coordinates);
 
     return coordinates;
 };
 
 export const pointUnproject = (coordinates: CoordPoint) => {
-    const { x, y } = inverse(proj4.toPoint(coordinates));
-    coordinates[0] = x;
-    coordinates[1] = y;
+    coordinates = inverse(coordinates);
 
     return coordinates;
 };
